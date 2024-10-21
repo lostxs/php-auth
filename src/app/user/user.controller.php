@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/user.service.php';
+require_once __DIR__ . '/../../common/middlewares/auth.middleware.php';
 
 class UserController
 {
@@ -12,25 +13,14 @@ class UserController
 
   public function showProfile()
   {
-    $this->isLoggedIn();
-
+    AuthMiddleware::requireAuth();
     $user = $this->userService->getUserProfile($_SESSION['user_id']);
     require_once __DIR__ . '/../../views/profile.php';
   }
 
   public function handleUpdateProfile()
   {
-    $this->isLoggedIn();
-
+    AuthMiddleware::requireAuth();
     $this->userService->updateProfile($_SESSION['user_id'], $_POST);
-    header('Location: /profile');
-  }
-
-  private function isLoggedIn()
-  {
-    if (!isset($_SESSION['user_id'])) {
-      header('Location: /login');
-      exit();
-    }
   }
 }

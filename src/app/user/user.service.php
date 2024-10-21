@@ -18,7 +18,7 @@ class UserService
     return $this->userModel->getUserById($userId);
   }
 
-  public function updateProfile($userId, $data)
+  public function updateProfile(int $userId, array $data): bool
   {
     $username = InputValidator::sanitizeInput($data['username']);
     $phone = InputValidator::sanitizeInput($data['phone']);

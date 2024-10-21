@@ -3,8 +3,12 @@ require_once __DIR__ . '/../../config/db.php';
 
 class User
 {
-  public function createUser($username, $email, $phone, $password)
-  {
+  public function createUser(
+    string $username,
+    string $email,
+    string $phone,
+    string $password
+  ): bool {
     global $pdo;
     try {
       $stmt = $pdo->prepare(
@@ -22,7 +26,7 @@ class User
     }
   }
 
-  public function getUserById($userId)
+  public function getUserById(int $userId): mixed
   {
     global $pdo;
     try {
@@ -34,7 +38,7 @@ class User
     }
   }
 
-  public function getUserByUsername($username)
+  public function getUserByUsername(string $username): mixed
   {
     global $pdo;
     try {
@@ -46,7 +50,7 @@ class User
     }
   }
 
-  public function getUserByEmail($email)
+  public function getUserByEmail(string $email): mixed
   {
     global $pdo;
     try {
@@ -58,7 +62,7 @@ class User
     }
   }
 
-  public function getUserByPhone($phone)
+  public function getUserByPhone(string $phone): mixed
   {
     global $pdo;
     try {
@@ -70,7 +74,7 @@ class User
     }
   }
 
-  public function getUserByEmailOrPhone($query)
+  public function getUserByEmailOrPhone(string $query): mixed
   {
     global $pdo;
     try {
@@ -85,12 +89,12 @@ class User
   }
 
   public function updateUser(
-    $userId,
-    $username,
-    $email,
-    $phone,
-    $password = null
-  ) {
+    int $userId,
+    string $username,
+    string $email,
+    string $phone,
+    string $password = null
+  ): bool {
     global $pdo;
     try {
       $query =

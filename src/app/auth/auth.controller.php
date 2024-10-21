@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/auth.service.php';
+require_once __DIR__ . '/../../common/middlewares/auth.middleware.php';
 
 class AuthController
 {
@@ -11,43 +12,33 @@ class AuthController
     $this->authService = new AuthService($config);
   }
 
-  public function register()
+  public function register(): void
   {
-    $this->isLoggedIn();
-
+    AuthMiddleware::requireGuest();
     require_once __DIR__ . '/../../views/register.php';
   }
 
-  public function login()
+  public function login(): void
   {
-    $this->isLoggedIn();
-
+    AuthMiddleware::requireGuest();
     require_once __DIR__ . '/../../views/login.php';
   }
 
-  public function handleLogin()
+  public function handleLogin(): void
   {
     $postData = array_map('htmlspecialchars', $_POST);
     $this->authService->login($postData);
   }
 
-  public function handleRegister()
+  public function handleRegister(): void
   {
     $postData = array_map('htmlspecialchars', $_POST);
     $this->authService->register($postData);
   }
 
-  public function logout()
+  public function logout(): void
   {
     $this->authService->logout();
     header('Location: /login');
-  }
-
-  private function isLoggedIn()
-  {
-    if (isset($_SESSION['user_id'])) {
-      header('Location: /profile');
-      exit();
-    }
   }
 }
