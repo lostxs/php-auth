@@ -10,7 +10,7 @@ $clientKey = $config['yandex']['client_key'];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авторизация</title>
-  <link rel="stylesheet" href="public/assets/styles/index.css">
+  <link rel="stylesheet" href="assets/styles/index.css">
   <script src="https://smartcaptcha.yandexcloud.net/captcha.js" defer></script>
 </head>
 <body>

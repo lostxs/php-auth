@@ -1,4 +1,4 @@
-# PHP + PostgreSQL + Docker
+# PHP авторизация (PostreSql, Docker)
 
 ## Запуск приложения
 
